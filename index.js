@@ -150,7 +150,8 @@ app.use(comicByIdRouter);
 app.all("*", (req, res) => {
   res.status(400).json({ message: "route not found" });
 });
-
-app.listen(3000, () => {
+// PORT (northflank ou local)
+const PORT = 3000;
+app.listen(process.env.PORT || PORT, () => {
   console.log("server started");
 });
