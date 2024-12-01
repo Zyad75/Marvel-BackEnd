@@ -8,8 +8,8 @@ const axios = require("axios"); // axios va permettre de faire des requetes à l
 app.use(cors());
 app.use(express.json()); // pour lire les paramettre body
 const apiKey = process.env.API_KEY;
-const mongoUrl = process.env.MONGO_URI;
-mongoose.connect(`${mongoUrl}`);
+
+mongoose.connect(process.env.MONGO_URI);
 //-------------------------------//
 //import des routes//
 const charactersRouter = require("./routes/characters");
