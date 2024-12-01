@@ -18,7 +18,11 @@ router.post("/user", async (req, res) => {
     if (!username || !email || !password) {
       return res.status(400).json({ message: "invalid data" });
     }
+    const existingUser = await User.findOne({ email: req.body.email });
 
+    if (existingUser) {
+      return res.status(409).json({ error: "email already used" });
+    }
     // création du hash salt et mon token
 
     const token = uid2(16);
