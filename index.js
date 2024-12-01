@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json()); // pour lire les paramettre body
 const apiKey = process.env.API_KEY;
 const mongoUrl = process.env.MONGO_URI;
-mongoose.connect(mongoUrl);
+mongoose.connect(`${mongoUrl}`);
 //-------------------------------//
 //import des routes//
 const charactersRouter = require("./routes/characters");
