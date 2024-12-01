@@ -1,4 +1,5 @@
 require("dotenv").config();
+const mongoose = require("mongoose");
 const express = require("express"); //premet de créer le serveur et les routes
 const cors = require("cors"); // permet d'interroger les routes depuis n'importe ou
 const app = express();
@@ -7,6 +8,9 @@ const axios = require("axios"); // axios va permettre de faire des requetes à l
 app.use(cors());
 app.use(express.json()); // pour lire les paramettre body
 const apiKey = process.env.API_KEY;
+mongoose.connect(
+  "mongodb+srv://zyadtaibi:xNRlmRjRwwk3aWEI@cluster0.6wco2.mongodb.net/marvel"
+);
 //-------------------------------//
 //import des routes//
 const charactersRouter = require("./routes/characters");
@@ -14,6 +18,7 @@ const comicsRouter = require("./routes/comics");
 const characterByIdRouter = require("./routes/characterById");
 const comicsOfCharRouter = require("./routes/comicsOfChar");
 const comicByIdRouter = require("./routes/comicById");
+const userRouter = require("./routes/user");
 //-------- route pour obtenir la liste de tous les personnages marvel -------//
 
 // app.get("/characters", async (req, res) => {
@@ -145,6 +150,7 @@ app.use(comicByIdRouter);
 // puis mon serveur effectuera a son tour une requete vers la route /comics/:comicId de l'api  de marvel pour obtenir un comic
 // puis il enverra en reponse au front la data qui contient  les infos du comic lié à cet id
 
+app.use(userRouter);
 //-------------------------------------------------------------------------------------------------------------------------------------------//
 
 app.all("*", (req, res) => {
